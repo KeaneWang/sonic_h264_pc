@@ -108,12 +108,12 @@ static struct uvc_format_desc uvc_fmts[] = {
 	{
 		.name		= "MPEG2 TS",
 		.guid		= UVC_GUID_FORMAT_MPEG,
-		.fcc		= V4L2_PIX_FMT_MPEG,	
+		.fcc		= V4L2_PIX_FMT_MPEG,
 	},
-	{	
+	{
 		.name		= "H.264",
 		.guid		= UVC_GUID_FORMAT_H264,
-		.fcc		= V4L2_PIX_FMT_H264,	
+		.fcc		= V4L2_PIX_FMT_H264,
 	},
 };
 
@@ -419,7 +419,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 				   alts->desc.bInterfaceNumber);
 			return -EINVAL;
 		}
-		
+
 		strlcpy(format->name, "MPEG2 TS", sizeof format->name);
 		format->fcc = V4L2_PIX_FMT_H264;
 		format->flags = UVC_FMT_FLAG_COMPRESSED | UVC_FMT_FLAG_STREAM;
@@ -438,7 +438,7 @@ static int uvc_parse_format(struct uvc_device *dev,
 		*(*intervals)++ = 1;
 		format->nframes = 1;
 		break;
-		
+
 	case UVC_VS_FORMAT_STREAM_BASED:
 		/* Not supported yet. */
 	default:
@@ -1704,7 +1704,7 @@ static int uvc_register_video(struct uvc_device *dev,
 	 * unregistered before the reference is released, so we don't need to
 	 * get another one.
 	 */
-	vdev->parent = &dev->intf->dev;
+	vdev->dev_parent = &dev->intf->dev;
 	vdev->fops = &uvc_fops;
 	vdev->release = uvc_release;
 	strlcpy(vdev->name, dev->name, sizeof vdev->name);
